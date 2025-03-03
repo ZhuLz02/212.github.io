@@ -1,12 +1,25 @@
 {
-  "version": 2,
-  "routes": [{
-      "handle": "filesystem"
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
     },
     {
-      "src": "/(.*)",
-      "status": 404,
-      "dest": "/"
+      "source": "(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=86400, max-age=86400"
+        }, {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "max-age=31536000"
+        }
+      ]
     }
   ]
 }
